@@ -1,13 +1,36 @@
-# power-agent-system
-Multi-Agent协作的智能电网调度决策系统 | 基于LSTM负荷预测扩展
-# ⚡ 智能电网多Agent调度决策系统
+# Power Agent System
 
-基于LSTM负荷预测的多Agent协作决策原型，解决电网突发异常响应慢、调度决策黑盒化的核心痛点。
+Multi-agent collaborative decision system for smart grid dispatch.
 
-## 🎯 核心痛点
+## Architecture
 
-传统LSTM模型仅输出数值预测，缺乏决策能力。当电网遭遇极端天气或设备故障时：
-- 调度员依赖经验手动决策，响应延迟 **15-30分钟**
-- 决策过程不可解释，存在大面积停电风险
+## Core Logic
 
-## 🏗️ 系统架构（多Agent协作）
+**Predict Agent**: LSTM-based load forecasting (from my open-source component)
+
+**Monitor Agent**: Real-time anomaly detection, trigger threshold >50MW deviation
+
+**Diagnose Agent**: Chain-of-Thought long-chain reasoning
+
+**Decide Agent**: Multi-objective scoring → output final strategy + explanation
+
+**Feedback Agent**: Record results, optimize Diagnose Agent reasoning strategy
+
+## Demo Run
+
+```python
+from agent_core import run_system
+result = run_system(predict=1200, actual=1350)
+{
+  'predict': 1200,
+  'actual': 1350, 
+  'anomaly': True,
+  'diagnosis': 'Step1: Deviation>50 | Step2: Check weather | Step3: Plan B',
+  'decision': 'Activate backup unit'
+}
+
+---
+
+## 第三步：Q4 + Q5 填写
+
+### Q4 粘贴：
